@@ -23,9 +23,10 @@ namespace assignment {
     int best_profit_mask = 0;
 
     // Tip: What if the weight is equal to the max weight? Can we stop the process?
-    if (capacity == sum_helper(weights)){
-      return mask2indices(profits, num_subsets-1);
-    // 0..00, 0..01, 0..10, 0..11, ..., 1..11
+    if (capacity == sum_helper(weights)) {
+      return mask2indices(profits, num_subsets - 1);
+    }
+      // 0..00, 0..01, 0..10, 0..11, ..., 1..11
     for (int mask = 0; mask < num_subsets; mask++) {  // 2^N
 
       // массив из весов рассматриваемых элементов
@@ -33,8 +34,9 @@ namespace assignment {
 
       // вычисление общего веса рассматриваемых элементов
       const int curr_weight = sum_helper(masked_weights);
-      if (curr_weight>capacity){
+      if (curr_weight>capacity) {
         continue;
+      }
       // ... обработка случая превышения емкости рюкзака
 
       // массив из "пользы" рассматриваемых элементов
@@ -42,9 +44,10 @@ namespace assignment {
 
       // вычисление общей "пользы" рассматриваемых элементов
       const int curr_profit = sum_helper(masked_profits);
-      if (curr_profit>best_profit){
+      if (curr_profit>best_profit) {
         best_profit_mask = mask;
         best_profit = curr_profit;
+      }
       // ... обработка случая нахождения большего значения "пользы"
     }
 
@@ -52,6 +55,7 @@ namespace assignment {
 
     return mask2indices(profits, best_profit_mask);
       }
-  }
+
+
 
 }  // namespace assignment
