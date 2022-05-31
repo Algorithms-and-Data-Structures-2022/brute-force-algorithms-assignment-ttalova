@@ -18,7 +18,27 @@ namespace assignment {
     // 2. Внутренний цикл: проверка разрядов битовой маски и генерация подмножества, ассоциирующегося с этой маской
     // 3. Подсчет суммы текущего подмножества, сохранение индексов подмножества с целевой суммой в результат
     // Tips: можно пропустить итерацию, если сумма текущего подмножества стала больше целевой суммы
+    for (int i = 0; i < num_subsets; i++) {
+      std::vector<int> subset;
 
+      for (int j = 0; j < num_elems; j++) {
+        if (is_bit_set(i, j)) {
+          subset.push_back(j);
+        }
+      }
+
+      int elem = 0;
+      for (int i = 0; i < subset.size(); i++) {
+        elem += set[subset[i]];
+        if (target_sum < elem) {
+          break;
+        }
+      }
+
+      if (elem == target_sum) {
+        indices.push_back(subset);
+      }
+    }
     return indices;
   }
 
